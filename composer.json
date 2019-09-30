@@ -1,0 +1,14 @@
+{
+    "require": {
+        "naka1205/phpkoa": "^1.8",
+        "topthink/think-orm": "^1.2",
+        "naka1205/phpkoa_static": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Controllers\\": "Controllers/",
+            "Models\\": "Models/",
+            "Middlewares\\": "Middlewares/"
+        }
+    }
+}
