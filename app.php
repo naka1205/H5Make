@@ -5,7 +5,6 @@ define('DS', DIRECTORY_SEPARATOR);
 define('IS_CLI', PHP_SAPI == 'cli' ? true : false);
 define('IS_WIN', strpos(PHP_OS, 'WIN') !== false);
 define('TEMPLATE_PATH', __DIR__ . DS . 'template');
-define('PUBLIC_PATH', __DIR__ . DS . 'public');
 
 use Naka507\Koa\Application;
 use Naka507\Koa\Context;
@@ -21,7 +20,9 @@ $app = new Application();
 $app->υse(new Error());
 $app->υse(new Timeout(5));
 $app->υse(new NotFound()); 
-$app->υse(new StaticFiles()); 
+
+$public =  __DIR__ . DS . 'public';
+$app->υse(new StaticFiles($public)); 
 
 $app->υse(new Cors()); 
 $app->υse(new BodyJson()); 

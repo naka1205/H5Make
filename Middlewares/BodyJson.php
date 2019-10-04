@@ -23,7 +23,6 @@ class BodyJson implements Middleware
                 $result['data'] = $data;
             }
             $ctx->body = json_encode( $result );
-            var_dump($ctx->body);
         }
     }
 }

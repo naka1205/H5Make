@@ -11,6 +11,7 @@ $config = [
     'hostport'    => '',
     'params'      => [],
     'charset'     => 'utf8',
+    'pk_convert_id' => true,
     'prefix'      => ''
 ];
 Db::setConfig($config);
