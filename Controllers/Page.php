@@ -33,4 +33,18 @@ class Page
         $ctx->body = $data;
     } 
 
+    public static function update(Context $ctx, $next, $var){
+        $ctx->status = 401;
+        if( !isset($var[0]) || !isset($ctx->req->request['id'])){
+            $ctx->body = '';
+            return;
+        }
+
+        $data = ( yield Pages::update($ctx->req->request) );
+
+        $ctx->status = 200;
+        $ctx->body = $data;
+
+    }
+
 }
