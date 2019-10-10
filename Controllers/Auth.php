@@ -2,6 +2,8 @@
 namespace Controllers;
 use Naka507\Koa\Context;
 use Models\User;
+
+use Middlewares\WebToken; 
 class Auth
 {
     public static function login(Context $ctx, $next){
@@ -11,13 +13,22 @@ class Auth
             return;
         }
         
-        $data = ( yield User::get(['loginId'=> $ctx->post['loginid']]) );
-        if (!$data || $data->authenticate($ctx->post['password']) ) {
+        $user = ( yield User::get(['loginId'=> $ctx->post['loginid']]) );
+        if (!$user || $user->authenticate($ctx->post['password']) ) {
             $ctx->body = '';
             return;
         }
+        $data = [
+            "salt" => $user->salt,
+            "name" => $user->name,
+            "loginId" => $user->loginId,
+            "role" => $user->role,
+            "id" => $user->id,
+            "_id" => $user->id
+        ];
+        $token = WebToken::encode($data);
         $ctx->status = 200;
-        $ctx->body = $data;
+        $ctx->body = ['token'=>$token ];
     }   
     
     

@@ -6,13 +6,12 @@ class Page
 {
     public static function index(Context $ctx, $next){
         $ctx->status = 401;
-        var_dump('index');
         if( !isset($ctx->get['type']) ){
             $ctx->body = '';
             return;
         }
 
-        $data = ( yield Pages::all(['type'=> $ctx->get['type']]) );
+        $data = ( yield Pages::all(['loginId' => $ctx->state['user']['loginId'] ,'type'=> $ctx->get['type']]) );
         foreach($data as $key=>$value){
             $value->_id = $value->id;
         }

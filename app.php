@@ -15,6 +15,7 @@ use Naka507\Koa\Router;
 use Naka507\Koa\StaticFiles; 
 use Middlewares\BodyJson; 
 use Middlewares\Cors; 
+use Middlewares\WebToken; 
 
 $app = new Application();
 $app->υse(new Error());
@@ -26,6 +27,7 @@ $app->υse(new StaticFiles($public));
 
 $app->υse(new Cors()); 
 $app->υse(new BodyJson()); 
+$app->υse(new WebToken('my_token',['/auth/login'])); 
 
 require __DIR__ . DS . "db.php";
 
